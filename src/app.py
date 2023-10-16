@@ -1,7 +1,7 @@
-from flask import Flask, flash, g, render_template, session, request, redirect
+from flask import Flask, flash, g, render_template, session, request, redirect, url_for
 import sqlite3
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 app.secret_key = "scAHj4MW1R"
 # Define the path to your SQLite database file
 DATABASE = 'D:\\16_Projects\\AutoScan\\data\\data.sqlite'
@@ -32,12 +32,13 @@ def display_data():
         return redirect('/login')
     if request.method == 'POST':
         id = request.form['code']
+        vehicle_section = id[0]
         conn = get_db()
         cursor = conn.cursor()
         cursor.execute("SELECT desc FROM codes WHERE id = ?", [id])
         data = cursor.fetchone()
         if data:
-            return render_template('display_tables.html', data = data[0])
+            return render_template('display_tables.html', data = data[0], vehicle_section=vehicle_section)
         else:
             return render_template('display_tables.html', data = "Code not found")
 

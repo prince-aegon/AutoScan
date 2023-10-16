@@ -104,8 +104,26 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"
         </div>
       </div>
     </div>
+    
     {% if data %}
-    <h3>{{data}}</h3>
+    <div style="padding-left:45%;">
+    {% if vehicle_section == 'P' %}
+      <img src="{{url_for('static', filename='engine.png')}}" width="80px">
+    {% endif %}
+    {% if vehicle_section == 'C' %}
+      <img src="{{url_for('static', filename='chassis.png')}}" width="80px">
+    {% endif %}
+    {% if vehicle_section == 'B' %}
+      <img src="{{url_for('static', filename='body.png')}}" width="80px">
+    {% endif %}
+    {% if vehicle_section == 'U' %}
+      <img src="{{url_for('static', filename='network.png')}}" width="80px">
+    {% endif %}
+
+  </div>
+    <div class="text" style="display: flex;
+    align-items: center; /* Vertically center */
+    justify-content: center;font-size: 25px;margin-top: 24px;color: hsl(219, 57%, 87%)">Result:&nbsp;&nbsp;{{data}}</div>
     {% endif %}
   </div>
 </section>
